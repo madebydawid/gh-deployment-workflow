@@ -13,4 +13,4 @@ The website will be accessible at: [gh-deployment-workflow](https://madebydawid.
 
 
 ## Screenshot
-https://github.com/madebydawid/gh-deployment-workflow/blob/main/images/github-actions-deployment.jpg?raw=true
+![Model](https://github.com/madebydawid/gh-deployment-workflow/blob/main/images/github-actions-deployment.jpg?raw=true)
