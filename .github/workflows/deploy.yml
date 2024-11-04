@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+# Trigger the workflow when pushing to main branch and when index.html changes
+on:
+  push:
+    branches:
+      - main  # Change this if your default branch has a different name
+    paths:
+      - 'index.html'  # Only run when index.html is modified
+
+# Set required permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner environment
+    
+    # Define environment variables accessible throughout the workflow
+    env:
+      BASE_URL: https://madebydawid.github.io/gh-deployment-workflow/
+    
+    steps:
+      # Step 1: Get the latest version of the code
+      - name: Check out the code
+        uses: actions/checkout@v4  # Using the latest stable version of checkout action
+      
+      # Step 2: Configure GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4  # Required for GitHub Pages deployment
+      
+      # Step 3: Deploy the site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3  # Popular action for GitHub Pages deployment
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub
+          publish_dir: ./  # Deploy the root directory
+      
+      # Step 4: Print the deployment URL for reference
+      - name: Output deployment URL
+        run: echo "The website is deployed at ${{ env.BASE_URL }}"
